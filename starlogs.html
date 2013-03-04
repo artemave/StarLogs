@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Starlogs</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <style type="text/css" media="all">
+      @font-face {
+        font-family: SWCrawlTitle;
+        src: url('https://dl.dropbox.com/u/362737/SWCrawlBody.ttf');
+      }
+      body {
+        background: black url('http://starwars.com/images/graphics/bg/generic-back.jpg') no-repeat top center fixed;
+        font-family: SWCrawlBody;
+        color: #faa620;
+      }
+
+      .scene {
+        width: 50%;
+        margin: 0px auto;
+        height         : 650px;
+        -webkit-perspective   : 600;
+        -webkit-perspective-origin: 50% 40%;
+      }
+      .plane {
+        position: absolute;
+        width          : 100%;
+        height         : 100%;
+        text-align: center;
+        -webkit-transform   : rotateX(60deg);
+      }
+      .content {
+        position       : absolute;
+        width: 100%;
+        margin: 0px auto;
+        bottom: 0%;
+        -webkit-opacity: 0;
+        -webkit-animation-name: crawling;
+        -webkit-animation-duration: 25s;
+        -webkit-animation-timing-function: linear;
+      }
+
+      @-webkit-keyframes crawling {
+        from {
+          bottom: 0%;
+        }
+        1% {
+          -webkit-opacity: 1;
+        }
+        99% {
+          -webkit-opacity: 0;
+        }
+        to {
+          bottom: 100%;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      $(function() {
+          var play = function(msgs) {
+            var counter = 0;
+            if (msgs.length > 0) {
+              $('.plane').append($('<div>', {class: 'content'}).text(msgs[0]))
+              setTimeout(function() {
+                play(msgs.slice(counter));
+              }, 1500);
+              counter++;
+            }
+            else {
+              counter = 0;
+            }
+          }
+
+          var messages = ["It goes on for a while...", "And then everyone dies"];
+          var url = 'https://api.github.com/repos/artemave/REST-assured/commits';
+          $.ajax(url, {
+            dataType: 'jsonp',
+            success: function(response) {
+              messages = $.map(response.data, function(commit_data) {
+                return commit_data.commit.message;
+              });
+              play(messages);
+            },
+            error: function(xrh, status, err) {
+              console.log(status, err);
+              play(messages);
+            }
+          });
+
+          $(document).on('webkitAnimationEnd', '.content', function() {
+              console.log(this)
+              $(this).remove();
+          });
+      })
+    </script>
+    <div class="scene">
+      <div class="plane">
+      </div>
+    </div>
+  </body>
+</html>
