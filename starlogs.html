@@ -6,7 +6,7 @@
     <style type="text/css" media="all">
       @font-face {
         font-family: SWCrawlTitle;
-        src: url('https://dl.dropbox.com/u/362737/SWCrawlBody.ttf');
+        src: url('SWCrawlBody.ttf');
       }
       body {
         background: black url('http://starwars.com/images/graphics/bg/generic-back.jpg') no-repeat top center fixed;
@@ -73,28 +73,31 @@
             }
           }
 
-          var messages = ["It goes on for a while...", "And then everyone dies"];
           var url = 'https://api.github.com/repos/artemave/REST-assured/commits';
           $.ajax(url, {
             dataType: 'jsonp',
             success: function(response) {
-              messages = $.map(response.data, function(commit_data) {
+              var messages = $.map(response.data, function(commit_data) {
                 return commit_data.commit.message;
               });
+              document.getElementById('theme').play();
               play(messages);
             },
             error: function(xrh, status, err) {
               console.log(status, err);
-              play(messages);
+              document.getElementById('imperial_march').play();
+              play(["It goes on for a while...", "And then everyone dies"]);
             }
           });
 
           $(document).on('webkitAnimationEnd', '.content', function() {
-              console.log(this)
               $(this).remove();
           });
       })
     </script>
+    <audio id="theme" loop src="theme.mp3" type="audio/mp3"></audio>
+    <audio id="imperial_march" loop src="imperial_march.mp3" type="audio/mp3"></audio>
+
     <div class="scene">
       <div class="plane">
       </div>
