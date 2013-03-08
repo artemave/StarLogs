@@ -2,15 +2,20 @@
   font-family: SWCrawlTitle;
   src: url('SWCrawlBody.ttf');
 }
+html {
+  height: 100%;
+}
 body {
   background: black url('stars.jpg') no-repeat top center fixed;
   font-family: SWCrawlBody;
+  height: 100%;
 }
 
 .scene {
   width: 50%;
   margin: 0px auto;
-  height: 650px;
+  /* border: thin solid white; */
+  height: 100%;
   -webkit-perspective: 600;
   -webkit-perspective-origin: 50% 40%;
 }
@@ -40,6 +45,7 @@ body {
 }
 
 .plane {
+  /* border: thin solid red; */
   display: none;
   position: absolute;
   width: 100%;
