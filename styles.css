@@ -34,13 +34,18 @@ body {
   background-color:rgba(255,255,255,0.3);
   -webkit-box-shadow: inset 0 0 4px 3px #ddd;
 }
+
+.input input:focus {
+  outline:none;
+}
+
 .plane {
   display: none;
   position: absolute;
-  width          : 100%;
-  height         : 100%;
+  width: 100%;
+  height: 100%;
   text-align: center;
-  -webkit-transform   : rotateX(60deg);
+  -webkit-transform: rotateX(60deg);
 }
 .content {
   position: absolute;

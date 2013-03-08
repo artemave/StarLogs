@@ -23,13 +23,20 @@
             }
           }
 
+          var repo_commits_url = function(input_value) {
+            var user_slash_repo = input_value.replace(new RegExp(".*github.com[/:](.*?)(\.git)?$"), '$1');
+            return 'https://api.github.com/repos/' + user_slash_repo + '/commits';
+          }
+
           $(document).on('webkitAnimationEnd', '.content', function() {
               $(this).remove();
           });
 
           $('.input').on('webkitTransitionEnd', function() {
+              var url = repo_commits_url($('input', this).val());
+
               $('.plane').show();
-              var url = 'https://api.github.com/repos/artemave/REST-assured/commits';
+
               $.ajax(url, {
                 dataType: 'jsonp',
                 success: function(response) {
