@@ -9,18 +9,27 @@
   <body>
     <script type="text/javascript" charset="utf-8">
       $(function() {
-          var play = function(msgs) {
+          var crawl = function(msgs) {
             var counter = 0;
             if (msgs.length > 0) {
               $('.plane').append($('<div>', {class: 'content'}).text(msgs[0]))
               setTimeout(function() {
-                play(msgs.slice(counter));
+                crawl(msgs.slice(counter));
               }, 1500);
               counter++;
             }
             else {
               counter = 0;
             }
+          }
+          var play_commits = function(msgs) {
+            document.getElementById('theme').play();
+            crawl(msgs);
+          }
+
+          var play_error = function() {
+            document.getElementById('imperial_march').play();
+            crawl(["This repo has been destroyed", "Just kidding!", "But then again who knows?", "I couldn't fetch it..."]);
           }
 
           var repo_commits_url = function(input_value) {
@@ -40,16 +49,20 @@
               $.ajax(url, {
                 dataType: 'jsonp',
                 success: function(response) {
-                  var messages = $.map(response.data, function(commit_data) {
-                    return commit_data.commit.message;
-                  });
-                  document.getElementById('theme').play();
-                  play(messages);
+                  if (response.data instanceof Array) {
+                    var messages = $.map(response.data, function(commit_data) {
+                      return commit_data.commit.message;
+                    });
+                    play_commits(messages);
+                  }
+                  else {
+                    console.log(response);
+                    play_error();
+                  }
                 },
                 error: function(xrh, status, err) {
                   console.log(status, err);
-                  document.getElementById('imperial_march').play();
-                  play(["It goes on for a while...", "And then everyone dies"]);
+                  play_error();
                 }
               });
           })
