@@ -16,7 +16,7 @@ body {
   margin: 0px auto;
   /* border: thin solid white; */
   height: 100%;
-  -webkit-perspective: 600;
+  -webkit-perspective: 1000;
   -webkit-perspective-origin: 50% 40%;
 }
 .input {
