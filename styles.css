@@ -24,7 +24,7 @@ body {
   position: absolute;
   top: 40%;
   width: 100%;
-  -webkit-transition: -webkit-transform 2s;
+  -webkit-transition: -webkit-transform 2s linear;
 }
 .input.zoomed {
   -webkit-transform: translateZ(1000px);
@@ -55,9 +55,10 @@ body {
 }
 .content {
   position: absolute;
+  /* border: thin solid green; */
   width: 100%;
   margin: 0px auto;
-  bottom: 0%;
+  top: 95%;
   color: #faa620;
   -webkit-opacity: 0;
   -webkit-animation-name: crawling;
@@ -67,7 +68,7 @@ body {
 
 @-webkit-keyframes crawling {
   from {
-    bottom: 0%;
+    top: 95%;
   }
   1% {
     -webkit-opacity: 1;
@@ -76,7 +77,7 @@ body {
     -webkit-opacity: 0;
   }
   to {
-    bottom: 100%;
+    top: 0%;
   }
 }
 

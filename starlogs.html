@@ -9,30 +9,33 @@
   <body>
     <script type="text/javascript" charset="utf-8">
       $(function() {
-          var crawl = function(msgs) {
+          function crawl(messages) {
             var counter = 0;
-            if (msgs.length > 0) {
-              $('.plane').append($('<div>', {class: 'content'}).text(msgs[0]))
+            var delay = function() {
+              var last_message_div_height = $('.content:last').height();
+              return 1000 + (500 * (last_message_div_height / 18));
+            }
+
+            if (messages.length > 0) {
+              $('.plane').append($('<div>', {class: 'content'}).text(messages[0]))
               setTimeout(function() {
-                crawl(msgs.slice(counter));
-              }, 1500);
+                crawl(messages.slice(counter));
+              }, delay());
               counter++;
             }
             else {
               counter = 0;
             }
           }
-          var play_commits = function(msgs) {
+          function play_commits(msgs) {
             document.getElementById('theme').play();
             crawl(msgs);
           }
-
-          var play_error = function() {
+          function play_error() {
             document.getElementById('imperial_march').play();
             crawl(["By the order of lord Vader", "This repo has been destroyed", "Just kidding!", "But then again who knows?", "I couldn't fetch it..."]);
           }
-
-          var repo_commits_url = function(input_value) {
+          function repo_commits_url(input_value) {
             var user_slash_repo = input_value.replace(new RegExp(".*github.com[/:](.*?)(\.git)?$"), '$1');
             return 'https://api.github.com/repos/' + user_slash_repo + '/commits';
           }
