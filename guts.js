@@ -60,7 +60,7 @@
                         return playCommit(messages);
                     } else {
                         console.log(response);
-                        return play_error();
+                        return playError();
                     }
                 },
                 error: function(xhr, status, err) {
@@ -71,6 +71,7 @@
         });
         return $("input").keyup(function(event) {
             if (event.keyCode === 13) {
+                document.getElementById("flying_ship").play();
                 return $(this).parent().addClass("zoomed");
             }
         });

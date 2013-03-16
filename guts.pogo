@@ -42,7 +42,7 @@ $
           play commit (messages)
         else
           console.log(response)
-          play_error()
+          play error()
 
       error = @(xhr, status, err)
         console.log(status, err)
@@ -51,5 +51,6 @@ $
 
   $ 'input'.keyup @(event)
     if (event.keyCode == 13)
+      document.get element by id 'flying_ship'.play()
       $(this).parent().add class 'zoomed'
 
