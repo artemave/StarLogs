@@ -24,7 +24,7 @@ body {
   position: absolute;
   top: 40%;
   width: 100%;
-  -webkit-transition: -webkit-transform 2s linear;
+  -webkit-transition: -webkit-transform 2.2s linear;
 }
 .input.zoomed {
   -webkit-transform: translateZ(1000px);
@@ -80,3 +80,42 @@ body {
   }
 }
 
+#galaxy {
+  left: 50%;
+  height: 50px;
+  width: 50px;
+  margin-left: -25px;
+  margin-top: -25px;
+  -webkit-perspective: 1000;
+  position: absolute;
+  top: 40%;
+}
+
+.star {
+  background: white;
+  position: absolute;
+}
+
+.wrap {
+  -webkit-transform-origin: top;
+  -webkit-transform: rotateX(90deg);
+  -webkit-animation: wrap 9s linear;
+  -webkit-animation-fill-mode: forwards;
+}
+
+.unwrap {
+  -webkit-transition: -webkit-transform 0.3s linear 1s;
+  -webkit-transform: rotateX(90deg) translateY(2000px);
+}
+
+@-webkit-keyframes wrap {
+  from {
+    height: 1px;
+  }
+  90% {
+    height: 35px;
+  }
+  to {
+    height: 1000px;
+  }
+}

@@ -32,25 +32,40 @@ $
   $ '.input'.on 'webkitTransitionEnd'
     url = ($ 'input' (this).val()) commits url
 
-    $ '.plane'.show()
+    /*$ '.plane'.show()*/
 
-    $.ajax (url) {
-      data type = 'jsonp'
-      success = @(response)
-        if (response.data :: Array)
-          messages = [record.commit.message, where: record <- response.data]
-          play commit (messages)
-        else
-          console.log(response)
-          play error()
+    /*$.ajax (url) {*/
+    /*  data type = 'jsonp'*/
+    /*  success = @(response)*/
+    /*    if (response.data :: Array)*/
+    /*      messages = [record.commit.message, where: record <- response.data]*/
+    /*      play commit (messages)*/
+    /*    else*/
+    /*      console.log(response)*/
+    /*      play error()*/
 
-      error = @(xhr, status, err)
-        console.log(status, err)
-        play error()
-    }
+    /*  error = @(xhr, status, err)*/
+    /*    console.log(status, err)*/
+    /*    play error()*/
+    /*}*/
 
   $ 'input'.keyup @(event)
     if (event.keyCode == 13)
       document.get element by id 'falcon_fly'.play()
       $(this).parent().add class 'zoomed'
 
+  for (n = 0, n < 100, n := n + 1)
+    edge size = 4 * Math.random()
+    position = {
+      top    = 200 - 400 * Math.random()
+      left   = 200 - 400 * Math.random()
+      width  = (edge size)
+      height = (edge size)
+    }
+    star = $ '<div>' (class: 'star wrap').css(position)
+    $ '#galaxy'.append (star)
+
+  document.get element by id 'light_speed_jump'.play()
+
+  $ '.star.wrap'.on 'webkitAnimationEnd'
+    $(this).add class 'unwrap'

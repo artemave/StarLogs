@@ -1,7 +1,7 @@
 (function() {
     var self = this;
     $(function() {
-        var crawl, playCommit, playError, commitsUrl;
+        var crawl, playCommit, playError, commitsUrl, n, edgeSize, position, star;
         crawl = function(messages) {
             var counter, delay;
             counter = 0;
@@ -40,40 +40,30 @@
         });
         $(".input").on("webkitTransitionEnd", function() {
             var url;
-            url = commitsUrl($("input", this).val());
-            $(".plane").show();
-            return $.ajax(url, {
-                dataType: "jsonp",
-                success: function(response) {
-                    var messages;
-                    if (response.data instanceof Array) {
-                        messages = function() {
-                            var gen1_results, gen2_items, gen3_i, record;
-                            gen1_results = [];
-                            gen2_items = response.data;
-                            for (gen3_i = 0; gen3_i < gen2_items.length; ++gen3_i) {
-                                record = gen2_items[gen3_i];
-                                gen1_results.push(record.commit.message);
-                            }
-                            return gen1_results;
-                        }();
-                        return playCommit(messages);
-                    } else {
-                        console.log(response);
-                        return playError();
-                    }
-                },
-                error: function(xhr, status, err) {
-                    console.log(status, err);
-                    return playError();
-                }
-            });
+            return url = commitsUrl($("input", this).val());
         });
-        return $("input").keyup(function(event) {
+        $("input").keyup(function(event) {
             if (event.keyCode === 13) {
                 document.getElementById("falcon_fly").play();
                 return $(this).parent().addClass("zoomed");
             }
+        });
+        for (n = 0; n < 100; n = n + 1) {
+            edgeSize = 4 * Math.random();
+            position = {
+                top: 200 - 400 * Math.random(),
+                left: 200 - 400 * Math.random(),
+                width: edgeSize,
+                height: edgeSize
+            };
+            star = $("<div>", {
+                "class": "star wrap"
+            }).css(position);
+            $("#galaxy").append(star);
+        }
+        document.getElementById("light_speed_jump").play();
+        return $(".star.wrap").on("webkitAnimationEnd", function() {
+            return $(this).addClass("unwrap");
         });
     });
 }).call(this);
