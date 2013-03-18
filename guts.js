@@ -71,7 +71,7 @@
         });
         return $("input").keyup(function(event) {
             if (event.keyCode === 13) {
-                document.getElementById("flying_ship").play();
+                document.getElementById("falcon_fly").play();
                 return $(this).parent().addClass("zoomed");
             }
         });

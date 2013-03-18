@@ -51,6 +51,6 @@ $
 
   $ 'input'.keyup @(event)
     if (event.keyCode == 13)
-      document.get element by id 'flying_ship'.play()
+      document.get element by id 'falcon_fly'.play()
       $(this).parent().add class 'zoomed'
 
