@@ -3,13 +3,12 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Starlogs</title>
-    <link rel="stylesheet" href="styles.css" media="screen" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/styles.css" media="screen" type="text/css" />
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   </head>
   <body>
-    <script src="guts.js" type="text/javascript"></script>
+    <script src="javascripts/guts.js" type="text/javascript"></script>
     <script type="text/javascript">
-
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-39231679-1']);
       _gaq.push(['_trackPageview']);
@@ -19,17 +18,14 @@
        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
        })();
-
     </script>
 
-    <audio id="theme" loop src="theme.mp3" type="audio/mp3"></audio>
-    <audio id="imperial_march" loop src="imperial_march.mp3" type="audio/mp3"></audio>
-    <audio id="flying_ship" src="flying_ship.mp3" type="audio/mp3"></audio>
-    <audio id="falcon_fly" src="falcon_fly.mp3" type="audio/mp3"></audio>
-    <audio id="light_speed_jump" src="light_speed_jump.mp3" type="audio/mp3"></audio>
+    <audio id="theme" loop src="assets/theme.ogg" type="audio/ogg"></audio>
+    <audio id="imperial_march" loop src="assets/imperial_march.ogg" type="audio/ogg"></audio>
+    <audio id="falcon_fly" src="assets/falcon_fly.ogg" type="audio/ogg"></audio>
+    <audio id="light_speed_jump" src="assets/light_speed_jump.ogg" type="audio/ogg"></audio>
 
-<div id="galaxy">
-</div>
+    <div id="galaxy"></div>
     <div class="scene">
       <div class="input">
         <input type="text" placeholder="github user/repo or url"></input>
