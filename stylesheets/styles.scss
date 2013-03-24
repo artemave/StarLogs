@@ -26,6 +26,7 @@ body {
 }
 
 .input {
+  display: none;
   text-align: center;
   position: absolute;
   top: 40%;
@@ -88,11 +89,10 @@ body {
 }
 
 #galaxy {
+  background-color: yellow;
   left: 50%;
-  height: 50px;
-  width: 50px;
-  margin-left: -25px;
-  margin-top: -25px;
+  height: 3px;
+  width: 3px;
   @include perspective(1000);
   position: absolute;
   top: 40%;
@@ -101,21 +101,15 @@ body {
 .star {
   background: white;
   position: absolute;
-}
-
-.wrap {
   @include transform-origin(top);
-  @include transform(rotateX(90deg));
-  @include animation(wrap 9s linear);
+  @include animation(wrap 8s linear);
   @include animation-fill-mode(forwards);
 }
 
 .unwrap {
   @include transition-property(transform);
   @include transition-duration(0.3s);
-  @include transition-delay(1s);
-  @include transition-timing-function(linear);
-  @include transform(rotateX(90deg) translateY(2000px));
+  @include transition-timing-function(ease-in);
 }
 
 @include keyframes(wrap) {

@@ -1,7 +1,9 @@
 (function() {
     var self = this;
     $(function() {
-        var crawl, playCommit, playError, commitsUrl, n, edgeSize, position, star;
+        var animationEnd, transitionEnd, crawl, playCommit, playError, commitsUrl, rotateAroundAngle, n, edgeSize, top, left, dynamic_style, star;
+        animationEnd = "animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd";
+        transitionEnd = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
         crawl = function(messages) {
             var counter, delay;
             counter = 0;
@@ -35,10 +37,10 @@
             userSlashRepo = repo.replace(new RegExp(".*github.com[/:](.*?)(\\.git)?$"), "$1");
             return "https://api.github.com/repos/" + userSlashRepo + "/commits";
         };
-        $(document).on("animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd", ".content", function() {
+        $(document).on(animationEnd, ".content", function() {
             return $(this).remove();
         });
-        $(".input").on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function() {
+        $(".input").on(transitionEnd, function() {
             var url;
             return url = commitsUrl($("input", this).val());
         });
@@ -48,22 +50,39 @@
                 return $(this).parent().addClass("zoomed");
             }
         });
-        for (n = 0; n < 100; n = n + 1) {
+        rotateAroundAngle = function(top, left) {
+            var theta;
+            theta = Math.atan2(-top, -left);
+            if (theta < 0) {
+                theta = theta + 2 * Math.PI;
+            }
+            return 90 + theta * 180 / Math.PI;
+        };
+        for (n = 0; n < 100; ++n) {
             edgeSize = 4 * Math.random();
-            position = {
-                top: 200 - 400 * Math.random(),
-                left: 200 - 400 * Math.random(),
+            top = 200 - 400 * Math.random();
+            left = 200 - 400 * Math.random();
+            dynamic_style = {
+                top: top,
+                left: left,
                 width: edgeSize,
-                height: edgeSize
+                height: edgeSize,
+                transform: "rotateX(90deg) rotateY(" + rotateAroundAngle(top, left) + "deg)",
+                "border-radius": edgeSize / 2
             };
             star = $("<div>", {
-                "class": "star wrap"
-            }).css(position);
+                "class": "star"
+            }).css(dynamic_style);
             $("#galaxy").append(star);
+            star.on(animationEnd, function() {
+                var self = this;
+                return setTimeout(function() {
+                    return $(self).addClass("unwrap").css({
+                        transform: dynamic_style.transform + " translateY(2000px)"
+                    });
+                }, 1e3);
+            });
         }
-        document.getElementById("light_speed_jump").play();
-        return $(".star.wrap").on("webkitAnimationEnd", function() {
-            return $(this).addClass("unwrap");
-        });
+        return document.getElementById("light_speed_jump").play();
     });
 }).call(this);

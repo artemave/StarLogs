@@ -26,6 +26,7 @@ body {
   perspective-origin: 50% 40%; }
 
 .input {
+  display: none;
   text-align: center;
   position: absolute;
   top: 40%;
@@ -139,11 +140,10 @@ body {
     top: 0%; } }
 
 #galaxy {
+  background-color: yellow;
   left: 50%;
-  height: 50px;
-  width: 50px;
-  margin-left: -25px;
-  margin-top: -25px;
+  height: 3px;
+  width: 3px;
   -webkit-perspective: 1000;
   -moz-perspective: 1000;
   -o-perspective: 1000;
@@ -153,22 +153,15 @@ body {
 
 .star {
   background: white;
-  position: absolute; }
-
-.wrap {
+  position: absolute;
   -webkit-transform-origin: top;
   -moz-transform-origin: top;
   -ms-transform-origin: top;
   -o-transform-origin: top;
   transform-origin: top;
-  -webkit-transform: rotateX(90deg);
-  -moz-transform: rotateX(90deg);
-  -ms-transform: rotateX(90deg);
-  -o-transform: rotateX(90deg);
-  transform: rotateX(90deg);
-  -webkit-animation: wrap 9s linear;
-  -moz-animation: wrap 9s linear;
-  animation: wrap 9s linear;
+  -webkit-animation: wrap 8s linear;
+  -moz-animation: wrap 8s linear;
+  animation: wrap 8s linear;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards; }
@@ -184,21 +177,11 @@ body {
   -ms-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
-  -webkit-transition-delay: 1s;
-  -moz-transition-delay: 1s;
-  -ms-transition-delay: 1s;
-  -o-transition-delay: 1s;
-  transition-delay: 1s;
-  -webkit-transition-timing-function: linear;
-  -moz-transition-timing-function: linear;
-  -ms-transition-timing-function: linear;
-  -o-transition-timing-function: linear;
-  transition-timing-function: linear;
-  -webkit-transform: rotateX(90deg) translateY(2000px);
-  -moz-transform: rotateX(90deg) translateY(2000px);
-  -ms-transform: rotateX(90deg) translateY(2000px);
-  -o-transform: rotateX(90deg) translateY(2000px);
-  transform: rotateX(90deg) translateY(2000px); }
+  -webkit-transition-timing-function: ease-in;
+  -moz-transition-timing-function: ease-in;
+  -ms-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  transition-timing-function: ease-in; }
 
 @-webkit-keyframes wrap {
   from {

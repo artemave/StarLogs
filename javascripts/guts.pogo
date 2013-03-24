@@ -1,4 +1,7 @@
 $
+  animation end  = 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd'
+  transition end = 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd'
+
   crawl (messages) =
     counter = 0
     delay () =
@@ -26,10 +29,10 @@ $
     user slash repo = repo.replace (@new RegExp ".*github.com[/:](.*?)(\.git)?$") '$1'
     "https://api.github.com/repos/#(user slash repo)/commits"
 
-  $(document).on 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd' '.content'
+  $(document).on (animation end) '.content'
     $(this).remove()
 
-  $ '.input'.on 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd'
+  $ '.input'.on (transition end)
     url = ($ 'input' (this).val()) commits url
 
     /*$ '.plane'.show()*/
@@ -54,18 +57,33 @@ $
       document.get element by id 'falcon_fly'.play()
       $(this).parent().add class 'zoomed'
 
-  for (n = 0, n < 100, n := n + 1)
+  rotate around angle (top, left) =
+    theta = Math.atan2(-top, -left)
+    if (theta < 0)
+      theta := theta + 2 * Math.PI
+
+    90 + theta * 180 / Math.PI
+
+
+  for (n = 0, n < 100, ++n)
     edge size = 4 * Math.random()
-    position = {
-      top    = 200 - 400 * Math.random()
-      left   = 200 - 400 * Math.random()
-      width  = (edge size)
-      height = (edge size)
+    top       = 200 - 400 * Math.random()
+    left      = 200 - 400 * Math.random()
+
+    dynamic_style = {
+      top             = top
+      left            = left
+      width           = (edge size)
+      height          = (edge size)
+      transform       = "rotateX(90deg) rotateY(#(rotate around (top, left) angle)deg)"
+      'border-radius' = edge size / 2
     }
-    star = $ '<div>' (class: 'star wrap').css(position)
+    star = $ '<div>' (class: 'star').css(dynamic_style)
     $ '#galaxy'.append (star)
 
-  document.get element by id 'light_speed_jump'.play()
+    star.on (animation end) =>
+      set timeout
+        $(self).add class 'unwrap'.css(transform: "#(dynamic_style.transform) translateY(2000px)")
+      1000 // transition-delay does not work :(
 
-  $ '.star.wrap'.on 'webkitAnimationEnd'
-    $(this).add class 'unwrap'
+  document.get element by id 'light_speed_jump'.play()
