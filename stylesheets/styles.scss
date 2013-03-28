@@ -89,7 +89,6 @@ body {
 }
 
 #galaxy {
-  background-color: yellow;
   left: 50%;
   height: 3px;
   width: 3px;
@@ -99,11 +98,11 @@ body {
 }
 
 .star {
-  background: white;
   position: absolute;
   @include transform-origin(top);
   @include animation(wrap 8s linear);
   @include animation-fill-mode(forwards);
+  @include linear-gradient(left, transparent, rgba(255,255,255,.2) 44%, white 45%, white 55%, rgba(255,255,255,.2) 56%, transparent)
 }
 
 .unwrap {
@@ -120,6 +119,6 @@ body {
     height: 35px;
   }
   to {
-    height: 1000px;
+    height: 2500px;
   }
 }

@@ -1,7 +1,7 @@
 (function() {
     var self = this;
     $(function() {
-        var animationEnd, transitionEnd, crawl, playCommit, playError, commitsUrl, rotateAroundAngle, n, edgeSize, top, left, dynamic_style, star;
+        var animationEnd, transitionEnd, crawl, playCommit, playError, commitsUrl, rotateAroundAngle, randomPointInACircleOf, n, edgeSize, top, left, dynamic_style, star;
         animationEnd = "animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd";
         transitionEnd = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
         crawl = function(messages) {
@@ -58,14 +58,23 @@
             }
             return 90 + theta * 180 / Math.PI;
         };
-        for (n = 0; n < 100; ++n) {
+        randomPointInACircleOf = function(radius) {
+            var r2, angle;
+            r2 = radius * Math.sqrt(Math.random());
+            angle = 2 * Math.PI * Math.random();
+            return {
+                left: r2 * Math.cos(angle),
+                top: r2 * Math.sin(angle)
+            };
+        };
+        for (n = 0; n < 150; ++n) {
             edgeSize = 4 * Math.random();
-            top = 200 - 400 * Math.random();
-            left = 200 - 400 * Math.random();
+            top = randomPointInACircleOf(300).top;
+            left = randomPointInACircleOf(300).left;
             dynamic_style = {
                 top: top,
                 left: left,
-                width: edgeSize,
+                width: edgeSize * 10,
                 height: edgeSize,
                 transform: "rotateX(90deg) rotateY(" + rotateAroundAngle(top, left) + "deg)",
                 "border-radius": edgeSize / 2
@@ -80,7 +89,7 @@
                     return $(self).addClass("unwrap").css({
                         transform: dynamic_style.transform + " translateY(2000px)"
                     });
-                }, 1e3);
+                }, 500);
             });
         }
         return document.getElementById("light_speed_jump").play();

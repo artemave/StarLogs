@@ -140,7 +140,6 @@ body {
     top: 0%; } }
 
 #galaxy {
-  background-color: yellow;
   left: 50%;
   height: 3px;
   width: 3px;
@@ -152,7 +151,6 @@ body {
   top: 40%; }
 
 .star {
-  background: white;
   position: absolute;
   -webkit-transform-origin: top;
   -moz-transform-origin: top;
@@ -164,7 +162,14 @@ body {
   animation: wrap 8s linear;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
-  animation-fill-mode: forwards; }
+  animation-fill-mode: forwards;
+  background-color: transparent;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, transparent), color-stop(44%, rgba(255, 255, 255, 0.2)), color-stop(45%, white), color-stop(55%, white), color-stop(56%, rgba(255, 255, 255, 0.2)), color-stop(100%, transparent));
+  background-image: -webkit-linear-gradient(left, transparent, rgba(255, 255, 255, 0.2) 44%, white 45%, white 55%, rgba(255, 255, 255, 0.2) 56%, transparent);
+  background-image: -moz-linear-gradient(left, transparent, rgba(255, 255, 255, 0.2) 44%, white 45%, white 55%, rgba(255, 255, 255, 0.2) 56%, transparent);
+  background-image: -ms-linear-gradient(left, transparent, rgba(255, 255, 255, 0.2) 44%, white 45%, white 55%, rgba(255, 255, 255, 0.2) 56%, transparent);
+  background-image: -o-linear-gradient(left, transparent, rgba(255, 255, 255, 0.2) 44%, white 45%, white 55%, rgba(255, 255, 255, 0.2) 56%, transparent);
+  background-image: linear-gradient(left, transparent, rgba(255, 255, 255, 0.2) 44%, white 45%, white 55%, rgba(255, 255, 255, 0.2) 56%, transparent); }
 
 .unwrap {
   -webkit-transition-property: -webkit-transform;
@@ -191,7 +196,7 @@ body {
     height: 35px; }
 
   to {
-    height: 1000px; } }
+    height: 2500px; } }
 
 @-moz-keyframes wrap {
   from {
@@ -201,7 +206,7 @@ body {
     height: 35px; }
 
   to {
-    height: 1000px; } }
+    height: 2500px; } }
 
 @-ms-keyframes wrap {
   from {
@@ -211,7 +216,7 @@ body {
     height: 35px; }
 
   to {
-    height: 1000px; } }
+    height: 2500px; } }
 
 @-o-keyframes wrap {
   from {
@@ -221,7 +226,7 @@ body {
     height: 35px; }
 
   to {
-    height: 1000px; } }
+    height: 2500px; } }
 
 @keyframes wrap {
   from {
@@ -231,4 +236,4 @@ body {
     height: 35px; }
 
   to {
-    height: 1000px; } }
+    height: 2500px; } }

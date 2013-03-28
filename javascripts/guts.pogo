@@ -64,16 +64,25 @@ $
 
     90 + theta * 180 / Math.PI
 
+  random point in a circle of (radius) =
+    r2 = radius * Math.sqrt(Math.random())
+    angle = 2 * Math.PI * Math.random()
 
-  for (n = 0, n < 100, ++n)
+    {
+      left = r2 * Math.cos(angle)
+      top = r2 * Math.sin(angle)
+    }
+
+
+  for (n = 0, n < 150, ++n)
     edge size = 4 * Math.random()
-    top       = 200 - 400 * Math.random()
-    left      = 200 - 400 * Math.random()
+    top       = random point in a circle of 300.top
+    left      = random point in a circle of 300.left
 
     dynamic_style = {
       top             = top
       left            = left
-      width           = (edge size)
+      width           = (edge size) * 10
       height          = (edge size)
       transform       = "rotateX(90deg) rotateY(#(rotate around (top, left) angle)deg)"
       'border-radius' = edge size / 2
@@ -84,6 +93,6 @@ $
     star.on (animation end) =>
       set timeout
         $(self).add class 'unwrap'.css(transform: "#(dynamic_style.transform) translateY(2000px)")
-      1000 // transition-delay does not work :(
+      500 // transition-delay does not work in chrome :(
 
   document.get element by id 'light_speed_jump'.play()
