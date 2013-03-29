@@ -65,7 +65,7 @@ $
     90 + theta * 180 / Math.PI
 
   random point in a circle of (radius) =
-    r2    = radius * Math.sqrt(Math.random())
+    r2    = radius * (Math.random() + 0.05)
     angle = 2 * Math.PI * Math.random()
 
     {
@@ -74,9 +74,9 @@ $
     }
 
 
-  for (n = 0, n < 150, ++n)
+  for (n = 0, n < 220, ++n)
     edge size    = 5 * Math.random()
-    random point = random point in a circle of 250
+    random point = random point in a circle of (document.width / 2.2)
 
     dynamic_style = {
       top             = random point.top

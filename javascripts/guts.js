@@ -60,16 +60,16 @@
         };
         randomPointInACircleOf = function(radius) {
             var r2, angle;
-            r2 = radius * Math.sqrt(Math.random());
+            r2 = radius * (Math.random() + .05);
             angle = 2 * Math.PI * Math.random();
             return {
                 left: r2 * Math.cos(angle),
                 top: r2 * Math.sin(angle)
             };
         };
-        for (n = 0; n < 150; ++n) {
+        for (n = 0; n < 220; ++n) {
             edgeSize = 5 * Math.random();
-            randomPoint = randomPointInACircleOf(250);
+            randomPoint = randomPointInACircleOf(document.width / 2.2);
             dynamic_style = {
                 top: randomPoint.top,
                 left: randomPoint.left,
