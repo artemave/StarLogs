@@ -100,7 +100,7 @@ body {
 .star {
   position: absolute;
   @include transform-origin(top);
-  @include animation(wrap 8s linear);
+  @include animation(wrap 8s ease-in);
   @include animation-fill-mode(forwards);
   @include linear-gradient(left, transparent, rgba(255,255,255,.2) 44%, white 45%, white 55%, rgba(255,255,255,.2) 56%, transparent)
 }
@@ -119,6 +119,6 @@ body {
     height: 35px;
   }
   to {
-    height: 2500px;
+    height: 3000px;
   }
 }

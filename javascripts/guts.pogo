@@ -65,26 +65,25 @@ $
     90 + theta * 180 / Math.PI
 
   random point in a circle of (radius) =
-    r2 = radius * Math.sqrt(Math.random())
+    r2    = radius * Math.sqrt(Math.random())
     angle = 2 * Math.PI * Math.random()
 
     {
       left = r2 * Math.cos(angle)
-      top = r2 * Math.sin(angle)
+      top  = r2 * Math.sin(angle)
     }
 
 
   for (n = 0, n < 150, ++n)
-    edge size = 4 * Math.random()
-    top       = random point in a circle of 300.top
-    left      = random point in a circle of 300.left
+    edge size    = 5 * Math.random()
+    random point = random point in a circle of 250
 
     dynamic_style = {
-      top             = top
-      left            = left
+      top             = random point.top
+      left            = random point.left
       width           = (edge size) * 10
       height          = (edge size)
-      transform       = "rotateX(90deg) rotateY(#(rotate around (top, left) angle)deg)"
+      transform       = "rotateX(90deg) rotateY(#(rotate around (random point.top, random point.left) angle)deg)"
       'border-radius' = edge size / 2
     }
     star = $ '<div>' (class: 'star').css(dynamic_style)

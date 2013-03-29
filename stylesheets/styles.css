@@ -157,9 +157,9 @@ body {
   -ms-transform-origin: top;
   -o-transform-origin: top;
   transform-origin: top;
-  -webkit-animation: wrap 8s linear;
-  -moz-animation: wrap 8s linear;
-  animation: wrap 8s linear;
+  -webkit-animation: wrap 8s ease-in;
+  -moz-animation: wrap 8s ease-in;
+  animation: wrap 8s ease-in;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
@@ -196,7 +196,7 @@ body {
     height: 35px; }
 
   to {
-    height: 2500px; } }
+    height: 3000px; } }
 
 @-moz-keyframes wrap {
   from {
@@ -206,7 +206,7 @@ body {
     height: 35px; }
 
   to {
-    height: 2500px; } }
+    height: 3000px; } }
 
 @-ms-keyframes wrap {
   from {
@@ -216,7 +216,7 @@ body {
     height: 35px; }
 
   to {
-    height: 2500px; } }
+    height: 3000px; } }
 
 @-o-keyframes wrap {
   from {
@@ -226,7 +226,7 @@ body {
     height: 35px; }
 
   to {
-    height: 2500px; } }
+    height: 3000px; } }
 
 @keyframes wrap {
   from {
@@ -236,4 +236,4 @@ body {
     height: 35px; }
 
   to {
-    height: 2500px; } }
+    height: 3000px; } }

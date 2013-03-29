@@ -1,7 +1,7 @@
 (function() {
     var self = this;
     $(function() {
-        var animationEnd, transitionEnd, crawl, playCommit, playError, commitsUrl, rotateAroundAngle, randomPointInACircleOf, n, edgeSize, top, left, dynamic_style, star;
+        var animationEnd, transitionEnd, crawl, playCommit, playError, commitsUrl, rotateAroundAngle, randomPointInACircleOf, n, edgeSize, randomPoint, dynamic_style, star;
         animationEnd = "animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd";
         transitionEnd = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
         crawl = function(messages) {
@@ -68,15 +68,14 @@
             };
         };
         for (n = 0; n < 150; ++n) {
-            edgeSize = 4 * Math.random();
-            top = randomPointInACircleOf(300).top;
-            left = randomPointInACircleOf(300).left;
+            edgeSize = 5 * Math.random();
+            randomPoint = randomPointInACircleOf(250);
             dynamic_style = {
-                top: top,
-                left: left,
+                top: randomPoint.top,
+                left: randomPoint.left,
                 width: edgeSize * 10,
                 height: edgeSize,
-                transform: "rotateX(90deg) rotateY(" + rotateAroundAngle(top, left) + "deg)",
+                transform: "rotateX(90deg) rotateY(" + rotateAroundAngle(randomPoint.top, randomPoint.left) + "deg)",
                 "border-radius": edgeSize / 2
             };
             star = $("<div>", {
