@@ -1,7 +1,7 @@
 (function() {
     var self = this;
     $(function() {
-        var animationEnd, transitionEnd, crawl, playCommit, playError, commitsUrl, rotateAroundAngle, randomPointInACircleOf, n, edgeSize, randomPoint, dynamic_style, star;
+        var animationEnd, transitionEnd, crawl, playCommit, playError, commitsUrl, randomPointInACircleOf, n, edgeSize, randomPoint, width, dynamicStyle, star;
         animationEnd = "animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd";
         transitionEnd = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
         crawl = function(messages) {
@@ -50,43 +50,37 @@
                 return $(this).parent().addClass("zoomed");
             }
         });
-        rotateAroundAngle = function(top, left) {
-            var theta;
-            theta = Math.atan2(-top, -left);
-            if (theta < 0) {
-                theta = theta + 2 * Math.PI;
-            }
-            return 90 + theta * 180 / Math.PI;
-        };
         randomPointInACircleOf = function(radius) {
             var r2, angle;
             r2 = radius * (Math.random() + .05);
             angle = 2 * Math.PI * Math.random();
             return {
-                left: r2 * Math.cos(angle),
-                top: r2 * Math.sin(angle)
+                x: r2 * Math.cos(angle),
+                y: r2 * Math.sin(angle),
+                angle: angle * 180 / Math.PI
             };
         };
-        for (n = 0; n < 220; ++n) {
-            edgeSize = 5 * Math.random();
-            randomPoint = randomPointInACircleOf(document.width / 2.2);
-            dynamic_style = {
-                top: randomPoint.top,
-                left: randomPoint.left,
-                width: edgeSize * 10,
+        for (n = 0; n < 200; ++n) {
+            edgeSize = 4 * Math.random();
+            randomPoint = randomPointInACircleOf(document.body.clientWidth / 2.5);
+            width = edgeSize * 10;
+            dynamicStyle = {
+                top: -randomPoint.y,
+                left: randomPoint.x - width / 2,
+                width: width,
                 height: edgeSize,
-                transform: "rotateX(90deg) rotateY(" + rotateAroundAngle(randomPoint.top, randomPoint.left) + "deg)",
+                transform: "rotateX(90deg) rotateY(" + (-randomPoint.angle - 90) + "deg)",
                 "border-radius": edgeSize / 2
             };
             star = $("<div>", {
                 "class": "star"
-            }).css(dynamic_style);
+            }).css(dynamicStyle);
             $("#galaxy").append(star);
             star.on(animationEnd, function() {
                 var self = this;
                 return setTimeout(function() {
                     return $(self).addClass("unwrap").css({
-                        transform: dynamic_style.transform + " translateY(2000px)"
+                        transform: dynamicStyle.transform + " translateY(2000px)"
                     });
                 }, 500);
             });

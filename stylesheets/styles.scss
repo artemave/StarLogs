@@ -19,9 +19,9 @@ body {
 .scene {
   position: relative;
   width: 60%;
-  margin: 0px auto;
+  margin: 0 auto;
   height: 100%;
-  @include perspective(1000);
+  @include perspective(1000px);
   @include perspective-origin(50% 40%);
 }
 
@@ -69,7 +69,7 @@ body {
   position: absolute;
   width: 100%;
   font-size:36px;
-  margin: 0px auto;
+  margin: 0 auto;
   top: 95%;
   color: rgb(252,223,43);
   opacity: 0;
@@ -90,9 +90,9 @@ body {
 
 #galaxy {
   left: 50%;
-  height: 3px;
-  width: 3px;
-  @include perspective(1000);
+  height: 1px;
+  width: 1px;
+  @include perspective(1000px);
   position: absolute;
   top: 40%;
 }
@@ -100,7 +100,7 @@ body {
 .star {
   position: absolute;
   @include transform-origin(top);
-  @include animation(wrap 8s ease-in);
+  @include animation(wrap 8s linear);
   @include animation-fill-mode(forwards);
   @include linear-gradient(left, transparent, rgba(255,255,255,.2) 44%, white 45%, white 55%, rgba(255,255,255,.2) 56%, transparent)
 }

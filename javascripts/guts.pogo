@@ -53,45 +53,39 @@ $
     /*}*/
 
   $ 'input'.keyup @(event)
-    if (event.keyCode == 13)
+    if (event.key code == 13)
       document.get element by id 'falcon_fly'.play()
       $(this).parent().add class 'zoomed'
-
-  rotate around angle (top, left) =
-    theta = Math.atan2(-top, -left)
-    if (theta < 0)
-      theta := theta + 2 * Math.PI
-
-    90 + theta * 180 / Math.PI
 
   random point in a circle of (radius) =
     r2    = radius * (Math.random() + 0.05)
     angle = 2 * Math.PI * Math.random()
 
     {
-      left = r2 * Math.cos(angle)
-      top  = r2 * Math.sin(angle)
+      x     = r2 * Math.cos(angle)
+      y     = r2 * Math.sin(angle)
+      angle = angle * 180 / Math.PI
     }
 
+  for (n = 0, n < 200, ++n)
+    edge size    = 4 * Math.random()
+    random point = random point in a circle of (document.body.client width / 2.5)
+    width = edge size * 10
 
-  for (n = 0, n < 220, ++n)
-    edge size    = 5 * Math.random()
-    random point = random point in a circle of (document.width / 2.2)
-
-    dynamic_style = {
-      top             = random point.top
-      left            = random point.left
-      width           = (edge size) * 10
+    dynamic style = {
+      top             = -random point.y
+      left            = random point.x - width / 2
+      width           = width
       height          = (edge size)
-      transform       = "rotateX(90deg) rotateY(#(rotate around (random point.top, random point.left) angle)deg)"
+      transform       = "rotateX(90deg) rotateY(#(-random point.angle - 90)deg)"
       'border-radius' = edge size / 2
     }
-    star = $ '<div>' (class: 'star').css(dynamic_style)
+    star = $ '<div>' (class: 'star').css(dynamic style)
     $ '#galaxy'.append (star)
 
     star.on (animation end) =>
       set timeout
-        $(self).add class 'unwrap'.css(transform: "#(dynamic_style.transform) translateY(2000px)")
+        $(self).add class 'unwrap'.css(transform: "#(dynamic style.transform) translateY(2000px)")
       500 // transition-delay does not work in chrome :(
 
   document.get element by id 'light_speed_jump'.play()

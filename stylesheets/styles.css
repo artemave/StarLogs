@@ -14,12 +14,12 @@ body {
 .scene {
   position: relative;
   width: 60%;
-  margin: 0px auto;
+  margin: 0 auto;
   height: 100%;
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  -o-perspective: 1000;
-  perspective: 1000;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  -o-perspective: 1000px;
+  perspective: 1000px;
   -webkit-perspective-origin: 50% 40%;
   -moz-perspective-origin: 50% 40%;
   -o-perspective-origin: 50% 40%;
@@ -81,7 +81,7 @@ body {
   position: absolute;
   width: 100%;
   font-size: 36px;
-  margin: 0px auto;
+  margin: 0 auto;
   top: 95%;
   color: #fcdf2b;
   opacity: 0;
@@ -141,12 +141,12 @@ body {
 
 #galaxy {
   left: 50%;
-  height: 3px;
-  width: 3px;
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  -o-perspective: 1000;
-  perspective: 1000;
+  height: 1px;
+  width: 1px;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  -o-perspective: 1000px;
+  perspective: 1000px;
   position: absolute;
   top: 40%; }
 
@@ -157,9 +157,9 @@ body {
   -ms-transform-origin: top;
   -o-transform-origin: top;
   transform-origin: top;
-  -webkit-animation: wrap 8s ease-in;
-  -moz-animation: wrap 8s ease-in;
-  animation: wrap 8s ease-in;
+  -webkit-animation: wrap 8s linear;
+  -moz-animation: wrap 8s linear;
+  animation: wrap 8s linear;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
