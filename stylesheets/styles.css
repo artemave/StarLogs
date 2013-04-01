@@ -9,17 +9,18 @@ body {
   background: black url("/assets/stars.jpg") no-repeat top center fixed;
   background-size: cover;
   font-family: SWCrawlBody;
-  height: 100%; }
+  height: 100%;
+  overflow: hidden; }
 
 .scene {
   position: relative;
   width: 60%;
-  margin: 0px auto;
+  margin: 0 auto;
   height: 100%;
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  -o-perspective: 1000;
-  perspective: 1000;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  -o-perspective: 1000px;
+  perspective: 1000px;
   -webkit-perspective-origin: 50% 40%;
   -moz-perspective-origin: 50% 40%;
   -o-perspective-origin: 50% 40%;
@@ -35,11 +36,11 @@ body {
   -ms-transition-property: -ms-transform;
   -o-transition-property: -o-transform;
   transition-property: transform;
-  -webkit-transition-duration: 2s;
-  -moz-transition-duration: 2s;
-  -ms-transition-duration: 2s;
-  -o-transition-duration: 2s;
-  transition-duration: 2s;
+  -webkit-transition-duration: 2.2s;
+  -moz-transition-duration: 2.2s;
+  -ms-transition-duration: 2.2s;
+  -o-transition-duration: 2.2s;
+  transition-duration: 2.2s;
   -webkit-transition-timing-function: linear;
   -moz-transition-timing-function: linear;
   -ms-transition-timing-function: linear;
@@ -59,7 +60,7 @@ body {
     padding: 8px;
     border-width: 1px;
     background-color: rgba(255, 255, 255, 0.3);
-    box-shadow: inset 0 0 4px 3px #dddddd; }
+    box-shadow: inset 0 0 4px 3px #ddd; }
     .input input:focus {
       outline: none; }
 
@@ -80,7 +81,7 @@ body {
   position: absolute;
   width: 100%;
   font-size: 36px;
-  margin: 0px auto;
+  margin: 0 auto;
   top: 95%;
   color: #fcdf2b;
   opacity: 0;

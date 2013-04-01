@@ -1,4 +1,7 @@
 $
+  animation end  = 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd'
+  transition end = 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd'
+
   crawl (messages) =
     counter = 0
     delay () =
@@ -20,16 +23,16 @@ $
 
   play error () =
     document.get element by id 'imperial_march'.play()
-    crawl (["Tun dun dun, da da dun, da da dun ...", "Couldn't find the repo!"])
+    crawl (["Tun dun dun, da da dun, da da dun ...", "Couldn't find the repo, the repo!"])
 
   (repo) commits url =
     user slash repo = repo.replace (@new RegExp ".*github.com[/:](.*?)(\.git)?$") '$1'
     "https://api.github.com/repos/#(user slash repo)/commits"
 
-  $(document).on 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd' '.content'
+  $(document).on (animation end) '.content'
     $(this).remove()
 
-  $ '.input'.on 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd'
+  $ '.input'.on (transition end)
     url = ($ 'input' (this).val()) commits url
 
     $ '.plane'.show()
@@ -50,7 +53,7 @@ $
     }
 
   $ 'input'.keyup @(event)
-    if (event.keyCode == 13)
+    if (event.key code == 13)
       document.get element by id 'falcon_fly'.play()
       $(this).parent().add class 'zoomed'
 

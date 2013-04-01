@@ -1,7 +1,9 @@
 (function() {
     var self = this;
     $(function() {
-        var crawl, playCommit, playError, commitsUrl;
+        var animationEnd, transitionEnd, crawl, playCommit, playError, commitsUrl;
+        animationEnd = "animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd";
+        transitionEnd = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
         crawl = function(messages) {
             var counter, delay;
             counter = 0;
@@ -28,17 +30,17 @@
         };
         playError = function() {
             document.getElementById("imperial_march").play();
-            return crawl([ "Tun dun dun, da da dun, da da dun ...", "Couldn't find the repo!" ]);
+            return crawl([ "Tun dun dun, da da dun, da da dun ...", "Couldn't find the repo, the repo!" ]);
         };
         commitsUrl = function(repo) {
             var userSlashRepo;
             userSlashRepo = repo.replace(new RegExp(".*github.com[/:](.*?)(\\.git)?$"), "$1");
             return "https://api.github.com/repos/" + userSlashRepo + "/commits";
         };
-        $(document).on("animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd", ".content", function() {
+        $(document).on(animationEnd, ".content", function() {
             return $(this).remove();
         });
-        $(".input").on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function() {
+        $(".input").on(transitionEnd, function() {
             var url;
             url = commitsUrl($("input", this).val());
             $(".plane").show();
