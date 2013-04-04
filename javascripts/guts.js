@@ -1,7 +1,7 @@
 (function() {
     var self = this;
     $(function() {
-        var animationEnd, transitionEnd, crawl, playCommit, playError, commitsUrl;
+        var animationEnd, transitionEnd, crawl, playCommit, playError, commitsUrl, commitsFetch;
         animationEnd = "animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd";
         transitionEnd = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
         crawl = function(messages) {
@@ -34,45 +34,45 @@
         };
         commitsUrl = function(repo) {
             var userSlashRepo;
-            userSlashRepo = repo.replace(new RegExp(".*github.com[/:](.*?)(\\.git)?$"), "$1");
+            userSlashRepo = repo.replace(/.*github.com[\/:](.*?)(\.git)?$/, "$1");
             return "https://api.github.com/repos/" + userSlashRepo + "/commits";
         };
         $(document).on(animationEnd, ".content", function() {
             return $(this).remove();
         });
+        commitsFetch = void 0;
         $(".input").on(transitionEnd, function() {
-            var url;
-            url = commitsUrl($("input", this).val());
             $(".plane").show();
-            return $.ajax(url, {
-                dataType: "jsonp",
-                success: function(response) {
-                    var messages;
-                    if (response.data instanceof Array) {
-                        messages = function() {
-                            var gen1_results, gen2_items, gen3_i, record;
-                            gen1_results = [];
-                            gen2_items = response.data;
-                            for (gen3_i = 0; gen3_i < gen2_items.length; ++gen3_i) {
-                                record = gen2_items[gen3_i];
-                                gen1_results.push(record.commit.message);
-                            }
-                            return gen1_results;
-                        }();
-                        return playCommit(messages);
-                    } else {
-                        console.log(response);
-                        return playError();
-                    }
-                },
-                error: function(xhr, status, err) {
-                    console.log(status, err);
+            return commitsFetch.done(function(response) {
+                var messages;
+                if (response.data instanceof Array) {
+                    messages = function() {
+                        var gen1_results, gen2_items, gen3_i, record;
+                        gen1_results = [];
+                        gen2_items = response.data;
+                        for (gen3_i = 0; gen3_i < gen2_items.length; ++gen3_i) {
+                            record = gen2_items[gen3_i];
+                            gen1_results.push(record.commit.message);
+                        }
+                        return gen1_results;
+                    }();
+                    return playCommit(messages);
+                } else {
+                    console.log(response);
                     return playError();
                 }
+            }).fail(function(problem) {
+                console.log(problem);
+                return playError();
             });
         });
         return $("input").keyup(function(event) {
+            var url;
             if (event.keyCode === 13) {
+                url = commitsUrl($(this).val());
+                commitsFetch = $.ajax(url, {
+                    dataType: "jsonp"
+                });
                 document.getElementById("falcon_fly").play();
                 return $(this).parent().addClass("zoomed");
             }

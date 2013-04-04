@@ -26,34 +26,32 @@ $
     crawl (["Tun dun dun, da da dun, da da dun ...", "Couldn't find the repo, the repo!"])
 
   (repo) commits url =
-    user slash repo = repo.replace (@new RegExp ".*github.com[/:](.*?)(\.git)?$") '$1'
+    user slash repo = repo.replace r/.*github.com[\/:](.*?)(\.git)?$/ '$1'
     "https://api.github.com/repos/#(user slash repo)/commits"
 
   $(document).on (animation end) '.content'
     $(this).remove()
 
-  $ '.input'.on (transition end)
-    url = ($ 'input' (this).val()) commits url
+  commits fetch = nil
 
+  $ '.input'.on (transition end)
     $ '.plane'.show()
 
-    $.ajax (url) {
-      data type = 'jsonp'
-      success = @(response)
-        if (response.data :: Array)
-          messages = [record.commit.message, where: record <- response.data]
-          play commit (messages)
-        else
-          console.log(response)
-          play error()
-
-      error = @(xhr, status, err)
-        console.log(status, err)
+    commits fetch.done @(response)
+      if (response.data :: Array)
+        messages = [record.commit.message, where: record <- response.data]
+        play commit (messages)
+      else
+        console.log(response)
         play error()
-    }
+    .fail @(problem)
+      console.log(problem)
+      play error()
 
   $ 'input'.keyup @(event)
     if (event.key code == 13)
+      url = ($(this).val()) commits url
+      commits fetch := $.ajax (url) { data type = 'jsonp' }
+
       document.get element by id 'falcon_fly'.play()
       $(this).parent().add class 'zoomed'
-
