@@ -1,3 +1,4 @@
+// code here: https://github.com/artemave/StarLogs
 $
   animation end  = 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd'
   transition end = 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd'

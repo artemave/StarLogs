@@ -32,11 +32,11 @@ body {
   top: 40%;
   width: 100%;
   @include transition-property(transform);
-  @include transition-duration(2.2s);
+  @include transition-duration(3s);
   @include transition-timing-function(linear);
 
   &.zoomed {
-    @include transform(translateZ(1000px));
+    @include transform(translateZ(1500px));
   }
 
   input {
