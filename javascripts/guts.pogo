@@ -1,4 +1,3 @@
-// code here: https://github.com/artemave/StarLogs
 $
   animation end  = 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd'
   transition end = 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd'
@@ -30,14 +29,18 @@ $
     user slash repo = repo.replace r/.*github.com[\/:](.*?)(\.git)?$/ '$1'
     "https://api.github.com/repos/#(user slash repo)/commits"
 
+  get repo url from hash () =
+    match = window.location.hash.match r/#(.*?)\/(.*?)$/
+    if (match)
+      "https://api.github.com/repos/#(match.1)/#(match.2)/commits"
+
   $(document).on (animation end) '.content'
     $(this).remove()
 
   commits fetch = nil
 
-  $ '.input'.on (transition end)
+  show response () =
     $ '.plane'.show()
-
     commits fetch.done @(response)
       if (response.data :: Array)
         messages = [record.commit.message, where: record <- response.data]
@@ -49,10 +52,21 @@ $
       console.log(problem)
       play error()
 
-  $ 'input'.keyup @(event)
-    if (event.key code == 13)
-      url = ($(this).val()) commits url
-      commits fetch := $.ajax (url) { data type = 'jsonp' }
+  if (url = get repo url from hash())
+    commits fetch := $.ajax (url) { data type = 'jsonp' }
+    show response()
+  else
+    $ '.input'.on (transition end)
+      show response()
 
-      document.get element by id 'falcon_fly'.play()
-      $(this).parent().add class 'zoomed'
+    $ 'input'.keyup @(event)
+      if (event.key code == 13)
+        url := ($(this).val()) commits url
+        commits fetch := $.ajax (url) { data type = 'jsonp' }
+
+        document.get element by id 'falcon_fly'.play()
+        $(this).parent().add class 'zoomed'
+
+    $ '.input'.show()
+
+
