@@ -25,9 +25,12 @@ $
     document.get element by id 'imperial_march'.play()
     crawl (["Tun dun dun, da da dun, da da dun ...", "Couldn't find the repo, the repo!"])
 
-  (repo) commits url =
+  (repo) commits link =
     user slash repo = repo.replace r/.*github.com[\/:](.*?)(\.git)?$/ '$1'
-    "https://api.github.com/repos/#(user slash repo)/commits"
+    {
+      url = "https://api.github.com/repos/#(user slash repo)/commits"
+      hash_tag = "##(user slash repo)"
+    }
 
   get repo url from hash () =
     match = window.location.hash.match r/#(.*?)\/(.*?)$/
@@ -61,12 +64,13 @@ $
 
     $ 'input'.keyup @(event)
       if (event.key code == 13)
-        url := ($(this).val()) commits url
-        commits fetch := $.ajax (url) { data type = 'jsonp' }
+        repo = ($(this).val()) commits link
+
+        window.history.pushState(nil, nil, "#(repo.hash_tag)")
+        commits fetch := $.ajax (repo.url) { data type = 'jsonp' }
 
         document.get element by id 'falcon_fly'.play()
         $(this).parent().add class 'zoomed'
 
     $ '.input'.show()
-
 
