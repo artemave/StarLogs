@@ -55,7 +55,7 @@ $
       console.log(problem)
       play error()
 
-  $(window).bind 'hashchange'
+  $(window).on 'hashchange'
     window.location.reload()
 
   if (url = get repo url from hash())
