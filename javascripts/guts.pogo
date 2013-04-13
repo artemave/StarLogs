@@ -55,6 +55,9 @@ $
       console.log(problem)
       play error()
 
+  $(window).bind 'hashchange'
+    window.location.reload()
+
   if (url = get repo url from hash())
     commits fetch := $.ajax (url) { data type = 'jsonp' }
     show response()
