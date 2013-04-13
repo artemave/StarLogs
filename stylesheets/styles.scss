@@ -62,7 +62,7 @@ body {
   width: 100%;
   top: -20%;
   height: 140%;
-  text-align: center;
+  text-align: left;
   @include transform(rotateX(70deg) translateY(-20%));
 }
 
