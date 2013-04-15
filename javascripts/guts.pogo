@@ -37,11 +37,6 @@ $
     if (match)
       "https://api.github.com/repos/#(match.1)/#(match.2)/commits"
 
-  $(document).on (animation end) '.content'
-    $(this).remove()
-
-  commits fetch = nil
-
   show response () =
     $ '.plane'.show()
     commits fetch.done @(response)
@@ -55,8 +50,30 @@ $
       console.log(problem)
       play error()
 
+  create audio tag (looped: true) for (file name) =
+    source prefix = if (window.location.hostname == 'localhost')
+      ''
+    else
+      'http://d3t1gike226mnt.cloudfront.net'
+
+    tag = $ '<audio>' (id: file name, loop: looped)
+
+    mp3 source = $ '<source>' (src: "#(source prefix)/assets/#(file name).mp3", type: 'audio/mp3')
+    ogg source = $ '<source>' (src: "#(source prefix)/assets/#(file name).ogg", type: 'audio/ogg')
+
+    tag.append(mp3 source).append(ogg source).appendTo($ 'body')
+
+  $(document).on (animation end) '.content'
+    $(this).remove()
+
   $(window).on 'hashchange'
     window.location.reload()
+
+  create audio tag for "theme"
+  create audio tag for "imperial_march"
+  create audio tag (looped: false) for "falcon_fly"
+
+  commits fetch = nil
 
   if (url = get repo url from hash())
     commits fetch := $.ajax (url) { data type = 'jsonp' }
