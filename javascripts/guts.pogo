@@ -54,7 +54,7 @@ $
     source prefix = if (window.location.hostname == 'localhost')
       ''
     else
-      'https://googledrive.com/host/0B4hyxx8i_j9eelZmMHQxWEptWWc'
+      'https://dl.dropboxusercontent.com/u/362737/starlogs.net'
 
     tag = $ '<audio>' (id: file name, loop: looped)
 
