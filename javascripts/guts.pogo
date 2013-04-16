@@ -54,7 +54,7 @@ $
     source prefix = if (window.location.hostname == 'localhost')
       ''
     else
-      'http://d3t1gike226mnt.cloudfront.net'
+      'https://googledrive.com/host/0B4hyxx8i_j9eelZmMHQxWEptWWc'
 
     tag = $ '<audio>' (id: file name, loop: looped)
 
