@@ -75,6 +75,11 @@ body {
   color: rgb(252,223,43);
   opacity: 0;
   @include animation(crawling 25s linear);
+
+}
+
+.paused {
+  @include animation-play-state(paused);
 }
 
 @include keyframes(crawling) {

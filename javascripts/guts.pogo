@@ -1,6 +1,10 @@
 $
-  animation end  = 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd'
-  transition end = 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd'
+  animation end    = 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd'
+  transition end   = 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd'
+  visibilitychange = 'visibilitychange webkitvisibilitychange'
+
+  document hidden () =
+    document.hidden || document.webkitHidden
 
   crawl (messages) =
     counter = 0
@@ -9,11 +13,16 @@ $
       1000 + 500 * last message div height / 18
 
     if (messages.length > 0)
-      $ '.plane'.append ($('<div>', class: 'content').text (messages.0))
-      set timeout
-        crawl (messages.slice(counter))
-      (delay())
-      ++counter
+      if (document hidden ())
+        set timeout
+          crawl (messages)
+        (delay())
+      else
+        $ '.plane'.append ($('<div>', class: 'content').text (messages.0))
+        set timeout
+          crawl (messages.slice(counter))
+        (delay())
+        ++counter
     else
       counter := 0
 
@@ -86,7 +95,7 @@ $
       if (event.key code == 13)
         repo = ($(this).val()) commits link
 
-        window.history.pushState(nil, nil, "#(repo.hash_tag)")
+        window.history.push state(nil, nil, "#(repo.hash_tag)")
         commits fetch := $.ajax (repo.url) { data type = 'jsonp' }
 
         document.get element by id 'falcon_fly'.play()
@@ -94,3 +103,8 @@ $
 
     $ '.input'.show()
 
+  $(document).on (visibilitychange)
+    if (document hidden ())
+      $ '.content'.add class 'paused'
+    else
+      $ '.content'.remove class 'paused'
