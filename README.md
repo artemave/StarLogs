@@ -2,6 +2,10 @@ One day in a galaxy far, far away… someone might want to read your project his
 
 Get a preview today: http://starlogs.net
 
+-------
+
+It turns out that running popular site costs money. Namely, serving audio from S3. So if you like StarLogs being around, <a href='http://www.pledgie.com/campaigns/19835'><img alt='Click here to lend your support to: starlogs.net and make a donation at www.pledgie.com !' src='http://www.pledgie.com/campaigns/19835.png?skin_name=chrome' border='0' /></a>
+
 ### Want to hack on it?
 
 No problem. But first, it is not just Javascript and CSS. It is [pogoscript](http://pogoscript.org/) and [sass](http://sass-lang.com/). Oh, and they require node.js and ruby respectively.
