@@ -37,7 +37,7 @@ $
   (repo) commits link =
     user slash repo = repo.replace r/.*github.com[\/:](.*?)(\.git)?$/ '$1'
     {
-      url = "https://api.github.com/repos/#(user slash repo)/commits?per_page=1000"
+      url = "https://api.github.com/repos/#(user slash repo)/commits?per_page=100"
       hash_tag = "##(user slash repo)"
     }
 
