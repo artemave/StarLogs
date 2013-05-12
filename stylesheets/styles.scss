@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: SWCrawlBody;
-  src: url('/assets/SWCrawlBody.ttf');
+  src: url('../assets/SWCrawlBody.ttf');
 }
 
 html {
@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  background: black url('/assets/stars.jpg') no-repeat top center fixed;
+  background: black url('../assets/stars.jpg') no-repeat top center fixed;
   background-size: cover;
   font-family: SWCrawlBody;
   height: 100%;

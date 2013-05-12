@@ -63,12 +63,12 @@ $
     source prefix = if (window.location.hostname == 'localhost')
       ''
     else
-      'https://dl.dropboxusercontent.com/u/362737/starlogs.net'
+      'https://dl.dropboxusercontent.com/u/362737/starlogs.net/'
 
     tag = $ '<audio>' (id: file name, loop: looped)
 
-    mp3 source = $ '<source>' (src: "#(source prefix)/assets/#(file name).mp3", type: 'audio/mp3')
-    ogg source = $ '<source>' (src: "#(source prefix)/assets/#(file name).ogg", type: 'audio/ogg')
+    mp3 source = $ '<source>' (src: "#(source prefix)assets/#(file name).mp3", type: 'audio/mp3')
+    ogg source = $ '<source>' (src: "#(source prefix)assets/#(file name).ogg", type: 'audio/ogg')
 
     tag.append(mp3 source).append(ogg source).appendTo($ 'body')
 
