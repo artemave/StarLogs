@@ -76,6 +76,15 @@ body {
   opacity: 0;
   @include animation(crawling 25s linear);
 
+  h3 {
+      text-align: center;
+      font-size: 48px;
+      text-transform: uppercase;
+  }
+
+  div.body {
+      text-align: justify;
+  }
 }
 
 .paused {
@@ -93,4 +102,3 @@ body {
     top: 0%;
   }
 }
-
