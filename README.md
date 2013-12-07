@@ -34,3 +34,7 @@ Serve project folder:
     $ serve
 
 Navigate to http://localhost:3000/starlogs.html and take it from there!
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/artemave/starlogs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
