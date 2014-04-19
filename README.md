@@ -2,8 +2,6 @@ One day in a galaxy far, far away… someone might want to read your project his
 
 Get a preview today: http://starlogs.net
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/artemave/starlogs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
 ### Want to hack on it?
 
 No problem. But first, it is not just Javascript and CSS. It is [pogoscript](http://pogoscript.org/) and [sass](http://sass-lang.com/). Oh, and they require node.js and ruby respectively.
@@ -30,7 +28,7 @@ Leave it autocompile:
 
 Serve project folder:
 
-    $ npm install -g serve
-    $ serve
+    $ npm install -g node-static
+    $ static
 
 Navigate to http://localhost:3000/starlogs.html and take it from there!
