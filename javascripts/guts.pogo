@@ -6,6 +6,21 @@ $
   document hidden () =
     document.hidden || document.webkitHidden
 
+  get query variable (variable) =
+    res   = null
+    query = window.location.search.substring 1
+    vars  = query.split "&"
+
+    for (i = 0, i < vars.length, i := i+1)
+      pair = vars.(i).split "="
+      if (pair.0 == (variable))
+        res := pair.1
+
+    res
+
+  volume () =
+    get query variable "volume" || 1
+
   crawl (messages) =
     counter = 0
     delay () =
@@ -27,11 +42,11 @@ $
       counter := 0
 
   play commit (messages) =
-    document.get element by id 'theme'.play()
+    $'#theme'.prop('volume', volume()).get 0.play()
     crawl (messages)
 
   play error () =
-    document.get element by id 'imperial_march'.play()
+    $'#imperial_march'.prop('volume', volume()).get 0.play()
     crawl (["Tun dun dun, da da dun, da da dun ...", "Couldn't find the repo, the repo!"])
 
   (repo) commits link =
@@ -98,7 +113,7 @@ $
         window.history.push state(nil, nil, "#(repo.hash_tag)")
         commits fetch := $.ajax (repo.url) { data type = 'jsonp' }
 
-        document.get element by id 'falcon_fly'.play()
+        $ '#falcon_fly'.prop('volume', volume()).get 0.play()
         $(this).parent().add class 'zoomed'
 
     $ '.input'.show()
