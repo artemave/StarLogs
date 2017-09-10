@@ -33,7 +33,12 @@ $
           crawl (messages)
         (delay())
       else
-        $ '.plane'.append ($('<div>', class: 'content').text (messages.0))
+        paragraphs = messages.0.split("\n\n")
+        subject = paragraphs.0
+        paragraphs := ['<p>' + paragraph + '</p>' , where: paragraph <- paragraphs , paragraph != subject]
+        body = '<div class="body">' + paragraphs.join("\n\n") + '</div>'
+        data = '<h3>' + subject + '</h3>' + body
+        $ '.plane'.append ($('<div>', class: 'content').html (data))
         set timeout
           crawl (messages.slice(counter))
         (delay())
