@@ -35,6 +35,8 @@ function performCrawl(messages) {
 inputContainer.onkeydown = function (e) {
   if (e.keyCode === 13) {
     inputContainer.classList.add('zoomed')
+    const falconFly = document.getElementById('falconFly')
+    falconFly.play()
 
     const repo = inputContainer.querySelector('input').value
     fetchCommitMessagesPromise = fetchCommitMessages(repo)
@@ -42,11 +44,18 @@ inputContainer.onkeydown = function (e) {
 }
 
 inputContainer.ontransitionend = () => {
-  fetchCommitMessagesPromise.then(performCrawl).catch(() => {
+  fetchCommitMessagesPromise.then((messages) => {
+    performCrawl(messages)
+    const mainTheme = document.getElementById('mainTheme')
+    mainTheme.play()
+
+  }).catch(() => {
     performCrawl([
       "Tun dun dun, da da dun, 404",
       "404, da da dun, 404",
       "..."
     ])
+    const imperialMarch = document.getElementById('imperialMarch')
+    imperialMarch.play()
   })
 }
