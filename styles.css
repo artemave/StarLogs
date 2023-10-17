@@ -1,8 +1,3 @@
-@font-face {
-  font-family: SWCrawlBody;
-  src: url('./assets/SWCrawlBody.ttf');
-}
-
 html {
   height: 100%;
 }
@@ -10,7 +5,8 @@ html {
 body {
   background: black url('./assets/stars.jpg') no-repeat top center fixed;
   background-size: cover;
-  font-family: SWCrawlBody;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-weight: 600;
   height: 100%;
   overflow: hidden;
 }
