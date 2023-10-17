@@ -1,8 +1,3 @@
-const inputContainer = document.getElementById('inputContainer')
-const plane = document.getElementById('plane')
-
-let fetchCommitMessagesPromise
-
 async function fetchCommitMessages(repo) {
   const response = await fetch(`https://api.github.com/repos/${repo}/commits?per_page=100`)
   const commits = await response.json()
@@ -10,18 +5,18 @@ async function fetchCommitMessages(repo) {
 }
 
 function performCrawl(messages) {
-  const planeHeight = plane.clientHeight
-
   messages.forEach((message, index) => {
     const block = document.createElement('div')
     block.classList.add('block')
+    block.innerText = message
+
     if (index === 0) {
-      block.style.paddingTop = `${planeHeight}px`
+      block.style.paddingTop = `${plane.clientHeight}px`
     }
     if (index === messages.length - 1) {
       block.style.paddingBottom = '10000px'
     }
-    block.innerText = message
+
     plane.appendChild(block)
   })
 
@@ -31,6 +26,10 @@ function performCrawl(messages) {
   }
   requestAnimationFrame(scroll)
 }
+
+const inputContainer = document.getElementById('inputContainer')
+const plane = document.getElementById('plane')
+let fetchCommitMessagesPromise
 
 inputContainer.onkeydown = function (e) {
   if (e.keyCode === 13) {
@@ -43,10 +42,11 @@ inputContainer.onkeydown = function (e) {
   }
 }
 
+const mainTheme = document.getElementById('mainTheme')
+
 inputContainer.ontransitionend = () => {
   fetchCommitMessagesPromise.then((messages) => {
     performCrawl(messages)
-    const mainTheme = document.getElementById('mainTheme')
     mainTheme.play()
 
   }).catch(() => {
@@ -58,4 +58,24 @@ inputContainer.ontransitionend = () => {
     const imperialMarch = document.getElementById('imperialMarch')
     imperialMarch.play()
   })
+}
+
+let scrollEndTimeout
+
+function performScrollSoundEffect() {
+  if (scrollEndTimeout) {
+    clearTimeout(scrollEndTimeout)
+  }
+  mainTheme.playbackRate = 4.0
+
+  scrollEndTimeout = setTimeout(() => {
+    mainTheme.playbackRate = 1.0
+  }, 50)
+}
+
+plane.ontouchmove = performScrollSoundEffect
+if (plane.onwheel !== undefined) {
+  plane.onwheel = performScrollSoundEffect
+} else { // Safari
+  plane.onmousewheel = performScrollSoundEffect
 }
