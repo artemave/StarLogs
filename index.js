@@ -21,7 +21,7 @@ function performCrawl(messages) {
   })
 
   const scroll = () => {
-    plane.scrollBy({top: 1})
+    plane.scrollBy({top: window.innerHeight > 1000 ? 2 : 1})
     requestAnimationFrame(scroll)
   }
   requestAnimationFrame(scroll)
