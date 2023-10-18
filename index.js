@@ -11,24 +11,24 @@ function performCrawl(messages) {
     block.innerText = message
 
     if (index === 0) {
-      block.style.paddingTop = `${plane.clientHeight}px`
+      block.style.paddingTop = `${crawlContainer.clientHeight}px`
     }
     if (index === messages.length - 1) {
       block.style.paddingBottom = '10000px'
     }
 
-    plane.appendChild(block)
+    crawlContainer.appendChild(block)
   })
 
   const scroll = () => {
-    plane.scrollBy({top: window.innerHeight > 1000 ? 2 : 1})
+    crawlContainer.scrollBy({top: window.innerHeight > 1000 ? 2 : 1})
     requestAnimationFrame(scroll)
   }
   requestAnimationFrame(scroll)
 }
 
 const inputContainer = document.getElementById('inputContainer')
-const plane = document.getElementById('plane')
+const crawlContainer = document.getElementById('crawlContainer')
 let fetchCommitMessagesPromise
 
 inputContainer.onkeydown = function (e) {
@@ -73,9 +73,9 @@ function performScrollSoundEffect() {
   }, 50)
 }
 
-plane.ontouchmove = performScrollSoundEffect
-if (plane.onwheel !== undefined) {
-  plane.onwheel = performScrollSoundEffect
+crawlContainer.ontouchmove = performScrollSoundEffect
+if (crawlContainer.onwheel !== undefined) {
+  crawlContainer.onwheel = performScrollSoundEffect
 } else { // Safari
-  plane.onmousewheel = performScrollSoundEffect
+  crawlContainer.onmousewheel = performScrollSoundEffect
 }

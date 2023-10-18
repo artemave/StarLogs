@@ -55,7 +55,7 @@ body {
   outline: none;
 }
 
-#plane {
+#crawlContainer {
   mask-image: linear-gradient(to bottom, transparent 20%, black 100%);
   -webkit-mask-image: linear-gradient(to bottom, transparent 20%, black 100%);
   z-index: -1;
@@ -69,12 +69,12 @@ body {
   overflow: auto;
   scrollbar-width: none;
 }
-#plane::-webkit-scrollbar {
+#crawlContainer::-webkit-scrollbar {
   display: none;
 }
 
 @media (orientation: portrait) {
-  #plane {
+  #crawlContainer {
     mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
   }
