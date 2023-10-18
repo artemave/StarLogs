@@ -3,12 +3,24 @@ html {
 }
 
 body {
-  background: black url('./assets/stars.jpg') no-repeat top center fixed;
+  background: black url('./assets/stars_1080.jpg') no-repeat top center fixed;
   background-size: cover;
   font-family: 'Pathway Gothic One', sans-serif;
   font-weight: 600;
   height: 100%;
   margin: 0;
+}
+
+@media (min-width: 768px) {
+  body {
+    background-image: url('./assets/stars_2729.jpg');
+  }
+}
+
+@media (min-width: 1080px) {
+  body {
+    background-image: url('./assets/stars_3840.jpg');
+  }
 }
 
 #scene {
