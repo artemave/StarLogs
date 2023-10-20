@@ -9,3 +9,5 @@ export const falconFly = document.getElementById('falconFly')
 /** @type HTMLMediaElement */
 // @ts-ignore
 export const imperialMarch = document.getElementById('imperialMarch')
+
+export const link = document.getElementById('link')

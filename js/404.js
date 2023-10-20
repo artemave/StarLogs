@@ -5,6 +5,8 @@ import registerScrollSoundEffect from "./registerScrollSoundEffect.js"
 
 const [userOrg, repo] = window.location.pathname.split('/').slice(-2)
 
+document.title = `Star Logs - ${userOrg}/${repo}`
+
 fetchCommitMessages(`${userOrg}/${repo}`).then(messages => {
   performCrawl(messages)
   mainTheme.play()

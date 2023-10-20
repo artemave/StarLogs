@@ -125,3 +125,18 @@ body {
     top: 0%;
   }
 }
+
+#link {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  width: 36px;
+  display: none;
+  cursor: copy;
+  opacity: 0.5;
+}
+
+#link:hover {
+  opacity: 1;
+  transition: opacity .3s;
+}
