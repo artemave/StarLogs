@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "scripts": {
+    "dev": "http-server",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "http-server": "^14.1.1"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": "latest"
+    }
+  }
+}
