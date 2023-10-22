@@ -99,6 +99,14 @@ body {
   word-wrap: break-word;
 }
 
+.copied {
+  font-size: 300%;
+  color: white;
+  position: absolute;
+  right: 0;
+  animation: fadeaway 5s;
+}
+
 .content {
   position: absolute;
   width: 100%;
@@ -114,15 +122,12 @@ body {
   animation-play-state: paused;
 }
 
-@keyframes crawling {
+@keyframes fadeaway {
   from {
-    top: 101%;
-  }
-  1% {
     opacity: 1;
   }
   to {
-    top: 0%;
+    opacity: 0;
   }
 }
 

@@ -1,5 +1,5 @@
 import fetchCommitMessages from './fetchCommitMessages.js'
-import { inputContainer, mainTheme, falconFly, imperialMarch, link } from './domRefs.js'
+import { inputContainer, mainTheme, falconFly, imperialMarch, link, crawlContainer } from './domRefs.js'
 import performCrawl from './performCrawl.js'
 import registerScrollSoundEffect from './registerScrollSoundEffect.js'
 
@@ -24,7 +24,6 @@ inputContainer.ontransitionend = () => {
     performCrawl(messages)
     mainTheme.play()
     link.style.display = 'initial'
-    navigator.clipboard.writeText(window.location.href + repo)
 
   }).catch(() => {
     performCrawl([
@@ -34,6 +33,20 @@ inputContainer.ontransitionend = () => {
     ])
     imperialMarch.play()
   })
+}
+
+link.onclick = () => {
+  navigator.clipboard.writeText(window.location.href + repo)
+
+  const block = document.createElement('div')
+  block.classList.add('copied')
+  block.style.bottom = `-${crawlContainer.scrollTop - 70}px`
+  block.innerText = 'Copied!'
+  block.onanimationend = () => {
+    block.remove()
+  }
+
+  crawlContainer.appendChild(block);
 }
 
 registerScrollSoundEffect()
