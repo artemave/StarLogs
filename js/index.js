@@ -41,7 +41,7 @@ link.onclick = () => {
   const block = document.createElement('div')
   block.classList.add('copied')
   block.style.bottom = `-${crawlContainer.scrollTop - 70}px`
-  block.innerText = 'Copied!'
+  block.innerText = 'URL copied to clipboard!'
   block.onanimationend = () => {
     block.remove()
   }

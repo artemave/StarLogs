@@ -1,12 +1,13 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "http-server",
+    "dev": "node dev.js",
     "lint": "eslint ."
   },
   "devDependencies": {
+    "@types/node": "^20.8.7",
     "eslint": "^8.51.0",
-    "http-server": "^14.1.1"
+    "mime-types": "^2.1.35"
   },
   "eslintConfig": {
     "parserOptions": {
