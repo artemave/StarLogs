@@ -1,16 +1,16 @@
-import { mainTheme, crawlContainer } from './domRefs.js'
+import { crawlContainer } from './domRefs.js'
 
-export default function registerScrollSoundEffect() {
+export default function registerScrollSoundEffect(audio) {
   let scrollEndTimeout
 
   function performScrollSoundEffect() {
     if (scrollEndTimeout) {
       clearTimeout(scrollEndTimeout)
     }
-    mainTheme.playbackRate = 4
+    audio.playbackRate = 4
 
     scrollEndTimeout = setTimeout(() => {
-      mainTheme.playbackRate = 1
+      audio.playbackRate = 1
     }, 50)
   }
 

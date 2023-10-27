@@ -1,4 +1,4 @@
-html {
+:root {
   height: 100%;
 }
 
@@ -29,6 +29,8 @@ body {
   perspective: 500px;
   perspective-origin: 50% 40%;
   overflow: hidden;
+  z-index: 1;
+  text-align: center;
 }
 
 #inputContainer {
@@ -36,9 +38,9 @@ body {
   position: absolute;
   top: 40%;
   width: 100%;
-  transition-property: transform;
   transition-duration: 3s;
   transition-timing-function: linear;
+  z-index: 3;
 }
 
 #inputContainer.zoomed {
@@ -70,7 +72,7 @@ body {
 #crawlContainer {
   mask-image: linear-gradient(to bottom, transparent 20%, black 100%);
   -webkit-mask-image: linear-gradient(to bottom, transparent 20%, black 100%);
-  z-index: -1;
+  z-index: 2;
   position: absolute;
   width: 100%;
   height: calc(100vw * 2);
@@ -132,6 +134,7 @@ body {
 }
 
 #link {
+  z-index: 4;
   position: absolute;
   bottom: 5%;
   right: 5%;
@@ -144,4 +147,17 @@ body {
 #link:hover {
   opacity: 1;
   transition: opacity .3s;
+}
+
+#play {
+  height: 20%;
+  top: 31%;
+  transition-duration: 3s;
+  transition-timing-function: linear;
+  position: relative;
+  z-index: 3;
+  cursor: pointer;
+}
+#play.zoomed {
+  transform: translateZ(700px) rotate(0.5turn);
 }
