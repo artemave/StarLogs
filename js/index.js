@@ -1,5 +1,5 @@
 import fetchCommitMessages from './fetchCommitMessages.js'
-import { inputContainer, link, crawlContainer } from './domRefs.js'
+import { inputContainer, crawlContainer } from './domRefs.js'
 import performCrawl from './performCrawl.js'
 import registerScrollSoundEffect from './registerScrollSoundEffect.js'
 
@@ -21,7 +21,7 @@ inputContainer.onkeydown = function (e) {
     inputContainer.classList.add('zoomed')
 
     audio.onended = () => {
-      audio.src = 'assets/theme.mp3'
+      audio.src = '/assets/theme.mp3'
     }
     loadThemePromise = new Promise((resolve) => {
       audio.oncanplaythrough = resolve
@@ -31,6 +31,9 @@ inputContainer.onkeydown = function (e) {
     if (repo.startsWith('https://github.com')) {
       repo = repo.split('/').slice(-2).join('/')
     }
+    window.history.pushState({}, '', `/${repo}`)
+    document.title = `Star Logs - ${repo}`
+
     fetchCommitMessagesPromise = fetchCommitMessages(repo)
 
     // hide keyboard on mobile
@@ -39,12 +42,16 @@ inputContainer.onkeydown = function (e) {
   }
 }
 
+window.onpopstate = function () {
+  window.location.reload()
+  document.title = 'Star Logs'
+}
+
 inputContainer.ontransitionend = function() {
   Promise.all([fetchCommitMessagesPromise, loadThemePromise]).then(([messages]) => {
     performCrawl(messages)
 
     audio.play()
-    link.style.display = 'initial'
 
   }).catch(() => {
     audio.src = 'assets/imperial_march.mp3'
@@ -59,20 +66,6 @@ inputContainer.ontransitionend = function() {
       ])
     })
   })
-}
-
-link.onclick = () => {
-  navigator.clipboard.writeText(window.location.href + repo)
-
-  const block = document.createElement('div')
-  block.classList.add('copied')
-  block.style.bottom = `-${crawlContainer.scrollTop - 70}px`
-  block.innerText = 'URL copied to clipboard!'
-  block.onanimationend = () => {
-    block.remove()
-  }
-
-  crawlContainer.appendChild(block);
 }
 
 registerScrollSoundEffect(audio)
