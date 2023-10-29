@@ -54,11 +54,12 @@ inputContainer.ontransitionend = function() {
     audio.play()
 
   }).catch(() => {
-    audio.src = 'assets/imperial_march.mp3'
+    audio.src = '/assets/imperial_march.mp3'
 
     new Promise((resolve) => {
       audio.oncanplaythrough = resolve
     }).then(() => {
+      audio.play()
       performCrawl([
         "Tun dun dun, da da dun, 404",
         "404, da da dun, 404",
