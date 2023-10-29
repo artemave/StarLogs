@@ -31,8 +31,6 @@ inputContainer.onkeydown = function (e) {
     if (repo.startsWith('https://github.com')) {
       repo = repo.split('/').slice(-2).join('/')
     }
-    window.history.pushState({}, '', `/${repo}`)
-    document.title = `Star Logs - ${repo}`
 
     fetchCommitMessagesPromise = fetchCommitMessages(repo)
 
@@ -49,8 +47,10 @@ window.onpopstate = function () {
 
 inputContainer.ontransitionend = function() {
   Promise.all([fetchCommitMessagesPromise, loadThemePromise]).then(([messages]) => {
-    performCrawl(messages)
+    window.history.pushState({}, '', `/${repo}`)
+    document.title = `Star Logs - ${repo}`
 
+    performCrawl(messages)
     audio.play()
 
   }).catch(() => {
