@@ -1,4 +1,4 @@
-# Star Logs
+# Star Logs [![pages-build-deployment](https://github.com/artemave/StarLogs/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/artemave/StarLogs/actions/workflows/pages/pages-build-deployment)
 
 One day in a galaxy far, far away… someone might want to read your project history.
 
