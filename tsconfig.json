@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
+    "module": "nodenext",
     "moduleResolution": "nodenext",
     "target": "es2020",
     "lib": [
