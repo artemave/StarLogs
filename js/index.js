@@ -1,22 +1,16 @@
 import fetchCommitMessages from './fetchCommitMessages.js'
-import { inputContainer, crawlContainer } from './domRefs.js'
+import { inputContainer } from './domRefs.js'
 import performCrawl from './performCrawl.js'
 import registerScrollSoundEffect from './registerScrollSoundEffect.js'
+import playErrorMessage from './playErrorMessage.js'
+import audio from './audio.js'
 
 let fetchCommitMessagesPromise
 let loadThemePromise
 let repo
 
-// On ios, only one audio element is allowed to play (perhaps because there's only one user interation?)
-// So we reuse a single audio element to play multiple sounds.
-// https://stackoverflow.com/a/57547943/51209
-const audio = new Audio('assets/falcon_fly.mp3')
-if (navigator.userAgent.match(/(iPhone|iPad)/)) {
-  audio.autoplay = true
-}
-
 inputContainer.onkeydown = function (e) {
-  if (e.keyCode === 13) {
+  if (e.key === 'Enter') {
     audio.play()
     inputContainer.classList.add('zoomed')
 
@@ -47,25 +41,15 @@ window.onpopstate = function () {
 
 inputContainer.ontransitionend = function() {
   Promise.all([fetchCommitMessagesPromise, loadThemePromise]).then(([messages]) => {
-    window.history.pushState({}, '', `/${repo}`)
-    document.title = `Star Logs - ${repo}`
+    if (messages) {
+      window.history.pushState({}, '', `/${repo}`)
+      document.title = `Star Logs - ${repo}`
 
-    performCrawl(messages)
-    audio.play()
-
-  }).catch(() => {
-    audio.src = '/assets/imperial_march.mp3'
-
-    new Promise((resolve) => {
-      audio.oncanplaythrough = resolve
-    }).then(() => {
+      performCrawl(messages)
       audio.play()
-      performCrawl([
-        "Tun dun dun, da da dun, 404",
-        "404, da da dun, 404",
-        "..."
-      ])
-    })
+    } else {
+      playErrorMessage(repo)
+    }
   })
 }
 
