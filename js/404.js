@@ -12,9 +12,9 @@ document.title = `Star Logs - ${repo}`
 let fetchCommitMessagesPromise
 
 play.onclick = function() {
-  sounds.canPlayNext.then(() => {
-    sounds.play()
-    sounds.queueNext('/assets/theme.mp3')
+  sounds.canPlayNextTrack.then(() => {
+    sounds.startPlayingCurrentTrack()
+    sounds.queueNextTrack('/assets/theme.mp3')
 
     play.classList.add('zoomed')
 
@@ -25,9 +25,9 @@ play.onclick = function() {
 
 
 play.ontransitionend = function() {
-  Promise.all([fetchCommitMessagesPromise, sounds.canPlayNext]).then(([messages]) => {
+  Promise.all([fetchCommitMessagesPromise, sounds.canPlayNextTrack]).then(([messages]) => {
     if (messages) {
-      sounds.play()
+      sounds.startPlayingCurrentTrack()
       performCrawl(messages)
     } else {
       playErrorMessage(repo)

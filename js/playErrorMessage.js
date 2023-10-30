@@ -5,11 +5,10 @@ import sounds from "./sounds.js";
  * @param {string} repo
  */
 export default function playErrorMessage(repo) {
-  sounds.queueNext('/assets/imperial_march.mp3').then(() => {
-    sounds.play()
+  sounds.startPlayingTrackNow('/assets/imperial_march.mp3').then(() => {
     performCrawl([
       '404',
-      `${repo} doesn't seem to be a github repository`,
+      `'${repo}' doesn't seem to be a github repository`,
       "E.g. 'artemave/starlogs'",
     ]);
   })

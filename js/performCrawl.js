@@ -42,7 +42,7 @@ function stopAutoScroll() {
 }
 
 function startAutoScroll() {
-  sounds.play()
+  sounds.startPlayingCurrentTrack()
   const scroll = () => {
     crawlContainer.scrollBy({ top: window.innerHeight > 1000 ? 2 : 1 })
     reqId = requestAnimationFrame(scroll)

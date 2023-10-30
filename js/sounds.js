@@ -15,7 +15,7 @@ class Sounds {
       this.#audio.autoplay = true
     }
 
-    this.canPlayNext = new Promise((resolve) => {
+    this.canPlayNextTrack = new Promise((resolve) => {
       this.#audio.oncanplaythrough = resolve
     })
   }
@@ -34,23 +34,28 @@ class Sounds {
   /**
      * @param {string} path
      */
-  async queueNext(path) {
-    if (this.#audio.paused || this.#audio.ended) {
+  async queueNextTrack(path) {
+    this.#audio.onended = () => {
       this.#audio.src = path
-    } else {
-      this.#audio.onended = () => {
-        this.#audio.src = path
-      }
     }
 
-    this.canPlayNext = new Promise((resolve) => {
+    return this.canPlayNextTrack = new Promise((resolve) => {
       this.#audio.oncanplaythrough = resolve
     })
-
-    return this.canPlayNext
   }
 
-  play() {
+  /**
+     * @param {string} path
+     */
+  async startPlayingTrackNow(path) {
+    this.#audio.src = path
+
+    return this.canPlayNextTrack = new Promise((resolve) => {
+      this.#audio.oncanplaythrough = resolve
+    })
+  }
+
+  startPlayingCurrentTrack() {
     this.#audio.play()
   }
 }
