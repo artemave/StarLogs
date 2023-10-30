@@ -1,4 +1,4 @@
-# Star Logs [![pages-build-deployment](https://github.com/artemave/StarLogs/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/artemave/StarLogs/actions/workflows/pages/pages-build-deployment)
+# Star Logs [![test](https://github.com/artemave/StarLogs/actions/workflows/test.yml/badge.svg)](https://github.com/artemave/StarLogs/actions/workflows/test.yml) [![Deploy static content to Pages](https://github.com/artemave/StarLogs/actions/workflows/static.yml/badge.svg)](https://github.com/artemave/StarLogs/actions/workflows/static.yml)
 
 One day in a galaxy far, far away… someone might want to read your project history.
 
