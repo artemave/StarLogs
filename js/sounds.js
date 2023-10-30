@@ -27,6 +27,10 @@ class Sounds {
     this.#audio.playbackRate = rate
   }
 
+  pause() {
+    this.#audio.pause()
+  }
+
   /**
      * @param {string} path
      */
