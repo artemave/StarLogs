@@ -2,7 +2,7 @@
   "type": "module",
   "scripts": {
     "dev": "node dev.js",
-    "lint": "eslint ."
+    "test": "eslint . && tsc"
   },
   "devDependencies": {
     "@types/node": "^20.8.7",

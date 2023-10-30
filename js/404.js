@@ -1,4 +1,4 @@
-import audio from "./audio.js"
+import sounds from "./sounds.js"
 import { play } from "./domRefs.js"
 import fetchCommitMessages from "./fetchCommitMessages.js"
 import performCrawl from "./performCrawl.js"
@@ -10,34 +10,24 @@ const repo = window.location.pathname.split('/').slice(-2).join('/')
 document.title = `Star Logs - ${repo}`
 
 let fetchCommitMessagesPromise
-let loadThemePromise
-
-const loadFalconFlyPromise = new Promise((resolve) => {
-  audio.oncanplaythrough = resolve
-})
 
 play.onclick = function() {
-  loadFalconFlyPromise.then(() => {
-    audio.play()
-    play.classList.add('zoomed')
+  sounds.canPlayNext.then(() => {
+    sounds.play()
+    sounds.queueNext('/assets/theme.mp3')
 
-    audio.onended = function() {
-      audio.src = '/assets/theme.mp3'
-    }
-    loadThemePromise = new Promise((resolve) => {
-      audio.oncanplaythrough = resolve
-    })
+    play.classList.add('zoomed')
 
     fetchCommitMessagesPromise = fetchCommitMessages(repo)
   })
-  play.onclick = () => {}
+  play.onclick = null
 }
 
 
 play.ontransitionend = function() {
-  Promise.all([fetchCommitMessagesPromise, loadThemePromise]).then(([messages]) => {
+  Promise.all([fetchCommitMessagesPromise, sounds.canPlayNext]).then(([messages]) => {
     if (messages) {
-      audio.play()
+      sounds.play()
       performCrawl(messages)
     } else {
       playErrorMessage(repo)
@@ -45,4 +35,4 @@ play.ontransitionend = function() {
   })
 }
 
-registerScrollSoundEffect(audio)
+registerScrollSoundEffect()

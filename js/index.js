@@ -3,31 +3,27 @@ import { inputContainer } from './domRefs.js'
 import performCrawl from './performCrawl.js'
 import registerScrollSoundEffect from './registerScrollSoundEffect.js'
 import playErrorMessage from './playErrorMessage.js'
-import audio from './audio.js'
+import sounds from './sounds.js'
 
 let fetchCommitMessagesPromise
-let loadThemePromise
 let repo
 
 inputContainer.onkeydown = function (e) {
   if (e.key === 'Enter') {
-    audio.play()
-    inputContainer.classList.add('zoomed')
-
-    audio.onended = () => {
-      audio.src = '/assets/theme.mp3'
-    }
-    loadThemePromise = new Promise((resolve) => {
-      audio.oncanplaythrough = resolve
-    })
-
     repo = inputContainer.querySelector('input').value
-    if (repo.startsWith('https://github.com')) {
-      repo = repo.split('/').slice(-2).join('/')
-    }
 
-    fetchCommitMessagesPromise = fetchCommitMessages(repo)
+    sounds.canPlayNext.then(() => {
+      sounds.play()
+      sounds.queueNext('/assets/theme.mp3')
 
+      inputContainer.classList.add('zoomed')
+
+      if (repo.startsWith('https://github.com')) {
+        repo = repo.split('/').slice(-2).join('/')
+      }
+
+      fetchCommitMessagesPromise = fetchCommitMessages(repo)
+    })
     // hide keyboard on mobile
     // @ts-ignore
     document.activeElement.blur()
@@ -40,17 +36,17 @@ window.onpopstate = function () {
 }
 
 inputContainer.ontransitionend = function() {
-  Promise.all([fetchCommitMessagesPromise, loadThemePromise]).then(([messages]) => {
+  Promise.all([fetchCommitMessagesPromise, sounds.canPlayNext]).then(([messages]) => {
     if (messages) {
       window.history.pushState({}, '', `/${repo}`)
       document.title = `Star Logs - ${repo}`
 
       performCrawl(messages)
-      audio.play()
+      sounds.play()
     } else {
       playErrorMessage(repo)
     }
   })
 }
 
-registerScrollSoundEffect(audio)
+registerScrollSoundEffect()

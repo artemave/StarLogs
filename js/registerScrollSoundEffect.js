@@ -1,16 +1,17 @@
 import { crawlContainer } from './domRefs.js'
+import sounds from './sounds.js'
 
-export default function registerScrollSoundEffect(audio) {
+export default function registerScrollSoundEffect() {
   let scrollEndTimeout
 
   function performScrollSoundEffect() {
     if (scrollEndTimeout) {
       clearTimeout(scrollEndTimeout)
     }
-    audio.playbackRate = 4
+    sounds.playbackRate = 4
 
     scrollEndTimeout = setTimeout(() => {
-      audio.playbackRate = 1
+      sounds.playbackRate = 1
     }, 50)
   }
 
