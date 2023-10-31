@@ -1,6 +1,8 @@
-// On ios, only one audio element is allowed to play (perhaps because there's only one user interation?)
-// So we reuse a single audio element to play multiple sounds.
-// https://stackoverflow.com/a/57547943/51209
+// Sounds reuses a single audio element to play multiple sounds.
+//
+// The reason this class exists (as opposed to simply using <audio> elements) is that
+// on ios only a single audio element is allowed to play (perhaps because there's only one user interation?).
+// And that element must be 'autoplay'. https://stackoverflow.com/a/57547943/51209
 
 class Sounds {
   #audio

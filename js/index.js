@@ -4,6 +4,7 @@ import performCrawl from './performCrawl.js'
 import registerScrollSoundEffect from './registerScrollSoundEffect.js'
 import playErrorMessage from './playErrorMessage.js'
 import sounds from './sounds.js'
+import './greeting.js'
 
 let fetchCommitMessagesPromise
 let repo

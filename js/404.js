@@ -4,6 +4,7 @@ import fetchCommitMessages from "./fetchCommitMessages.js"
 import performCrawl from "./performCrawl.js"
 import playErrorMessage from "./playErrorMessage.js"
 import registerScrollSoundEffect from "./registerScrollSoundEffect.js"
+import './greeting.js'
 
 const repo = window.location.pathname.split('/').slice(-2).join('/')
 
