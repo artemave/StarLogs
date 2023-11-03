@@ -12,3 +12,7 @@ cd StarLogs
 npm i
 npm dev
 ```
+
+## v1
+
+http://v1.starlogs.net
