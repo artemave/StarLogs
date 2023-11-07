@@ -2,7 +2,7 @@
 
 One day in a galaxy far, far away… someone might want to read your project history.
 
-Get a preview today: https://starlogs.net
+Get a preview today: https://starlogs.dev
 
 ## Development
 
